@@ -1,0 +1,9 @@
+<h3>{{ key }}</h3>
+<button (click)="discardGroupByKey(key)">Discard full category</button>
+<app-data-visualization-item
+  *ngFor="let val of value | keyvalue"
+  [key]="val.key"
+  [value]="val.value"
+  (dataChangeItem)="discardItemByKey($event)"
+>
+</app-data-visualization-item>
