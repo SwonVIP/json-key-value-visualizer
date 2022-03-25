@@ -14,7 +14,7 @@ Used config value for images: {{ imgPath }}
     id="data-input"
     (keyup)="handleDataInputChange($event)"
   ></textarea>
-  <ng-container *ngIf="isValid(resultDataValue)">
+  <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
     <div class="list">
       <h2>Result</h2>
       <button (click)="initateDownload()">Download Result</button>

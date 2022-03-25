@@ -13,7 +13,6 @@ export class AppComponent {
   data: Subject<DataContainer> = new Subject<DataContainer>();
   resultDataValue: DataContainer = {};
   displayData: any[] = [];
-  currentlyVisibleDisplayData: any[] = [];
   groupIndex: number = 0;
   groupKey: string = '';
   imgPath: string = '';
@@ -31,7 +30,6 @@ export class AppComponent {
         tap((data) => {
           this.groupIndex = 0;
           this.displayData = Object.values(data);
-          this.currentlyVisibleDisplayData = this.displayData[this.groupIndex];
           this.resultDataValue = { ...data };
           this.groupKey = Object.keys(this.resultDataValue)[this.groupIndex];
           // TODO Switch Map to enrich object with image path
@@ -54,6 +52,11 @@ export class AppComponent {
     if (this.resultDataValue) {
       delete this.resultDataValue[key];
     }
+    if (this.groupIndex + 1 === this.displayData.length) {
+      this.groupIndex--;
+    }
+    this.displayData = Object.values(this.resultDataValue);
+    this.groupKey = Object.keys(this.resultDataValue)[this.groupIndex];
   }
 
   removeItemByKey(keys: any) {
@@ -61,6 +64,9 @@ export class AppComponent {
       let parentKey, itemKey;
       ({ parentKey, itemKey } = keys);
       delete this.resultDataValue[parentKey]![itemKey];
+      if (Object.entries(this.resultDataValue[parentKey] as object).length === 0) {
+        this.removeGroupByKey(parentKey);
+      }
     }
   }
 
