@@ -1,5 +1,6 @@
 <p>
   {{ key }} <br />
-  {{ value }}
+  {{ value.title }} <br />
+  <img [src]="value.img" />
 </p>
 <button (click)="discardItemByKey(key)">Discard</button>

@@ -9,7 +9,7 @@ import { DataItem } from 'src/app/models/json-data';
 })
 export class DataVisualizationComponent implements OnInit {
   @Input() key: string = '';
-  @Input() value: DataItem | undefined = '';
+  @Input() value: DataItem | undefined;
   @Output() dataChangeGroup: EventEmitter<string> = new EventEmitter();
   @Output() dataChangeItem: EventEmitter<any> = new EventEmitter();
   constructor() {}

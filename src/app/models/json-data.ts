@@ -3,5 +3,10 @@ export interface DataContainer {
 }
 
 export interface DataItem {
-  [key: number]: string;
+  [key: number]: DataItemValue;
+}
+
+export interface DataItemValue {
+  title: string;
+  img: string;
 }

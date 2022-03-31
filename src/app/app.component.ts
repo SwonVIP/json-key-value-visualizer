@@ -15,8 +15,11 @@ export class AppComponent {
   displayData: any[] = [];
   groupIndex: number = 0;
   groupKey: string = '';
-  imgPath: string = '';
   inputError = false;
+  placeholderValue = ` Paste JSON here: {
+    "key": { "subkey": { "title": "", "img": "" }, "subkey2": { "title": "", "img": "" } },
+    "key2": { "subkey": { "title": "", "img": "" }, "subkey3": { "title": "", "img": "" } }
+  }`;
 
   constructor() {}
 
@@ -32,8 +35,6 @@ export class AppComponent {
           this.displayData = Object.values(data);
           this.resultDataValue = { ...data };
           this.groupKey = Object.keys(this.resultDataValue)[this.groupIndex];
-          // TODO Switch Map to enrich object with image path
-          this.loadImages();
         })
       )
       .subscribe();
@@ -71,36 +72,22 @@ export class AppComponent {
   }
 
   initateDownload() {
-    saveAs(
-      new Blob([JSON.stringify(this.resultDataValue)], { type: 'application/json;charset=utf-8' }),
-      'curated-groups.json'
-    );
+    // saveAs(
+    //   new Blob([JSON.stringify(this.resultDataValue)], { type: 'application/json;charset=utf-8' }),
+    //   'curated-groups.json'
+    // );
+    console.log(JSON.stringify(this.resultDataValue));
   }
 
   incrementGroupNavigation() {
-    // TODO async image loading?
-    this.loadImages();
     this.groupIndex++;
     this.groupKey = Object.keys(this.resultDataValue)[this.groupIndex];
   }
   decrementGroupNavigation() {
-    // TODO async image loading?
-    this.loadImages();
     this.groupIndex--;
     this.groupKey = Object.keys(this.resultDataValue)[this.groupIndex];
   }
 
-  moveToNextCategory(i: number) {}
-
-  // TODO Preparation for when we have the unified format + image CDN available
-  // Input to component map of id: image when ready
-  loadImages() {
-    const pids = Object.keys(this.resultDataValue[this.groupKey] as object);
-  }
-
-  saveImageConfig(event: any) {
-    this.imgPath = event.target.value;
-  }
   isValid(obj: DataContainer) {
     return Object.keys(obj).length > 0;
   }

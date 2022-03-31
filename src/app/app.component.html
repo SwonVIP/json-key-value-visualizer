@@ -1,8 +1,4 @@
 <h1>JSON Key Value Visualizer MVP</h1>
-<h2>Optional Image URL Config</h2>
-<!-- Reactive Forms instead -->
-<input placeholder="Paste third-party url here" (keyup)="saveImageConfig($event)" />
-Used config value for images: {{ imgPath }}
 <h2>Input JSON</h2>
 <div *ngIf="inputError">Failed to update: Wrong JSON format!!!</div>
 <div class="app-container">
@@ -10,7 +6,7 @@ Used config value for images: {{ imgPath }}
     name="data"
     cols="42"
     rows="20"
-    placeholder="Paste JSON here: { 'key': {'subkey': 'value', 'subkey2':'value'},'key2': {'subkey': 'value', 'subkey2':'value'}}"
+    [placeholder]="placeholderValue"
     id="data-input"
     (keyup)="handleDataInputChange($event)"
   ></textarea>
