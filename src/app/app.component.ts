@@ -16,6 +16,7 @@ export class AppComponent {
   groupIndex: number = 0;
   groupKey: string = '';
   inputError = false;
+  flatData: any;
   placeholderValue = ` Paste JSON here: {
     "key": { "subkey": { "title": "", "img": "" }, "subkey2": { "title": "", "img": "" } },
     "key2": { "subkey": { "title": "", "img": "" }, "subkey3": { "title": "", "img": "" } }
@@ -72,11 +73,23 @@ export class AppComponent {
   }
 
   initateDownload() {
-    // saveAs(
-    //   new Blob([JSON.stringify(this.resultDataValue)], { type: 'application/json;charset=utf-8' }),
-    //   'curated-groups.json'
-    // );
-    console.log(JSON.stringify(this.resultDataValue));
+    if (this.resultDataValue) {
+      saveAs(
+        new Blob([JSON.stringify(this.resultDataValue)], { type: 'application/json;charset=utf-8' }),
+        'curated-groups.json'
+      );
+      // TODO if mapping not changed in backend
+      // flatten response to not include nested title, img object anymore
+      // let downloadData: any = {};
+      // Object.keys(this.resultDataValue).forEach((key) => {
+      //   if (typeof this.resultDataValue[key] === 'object' && this.resultDataValue[key]) {
+      //     Object.keys(this.resultDataValue[key]).forEach((entry: any) => {
+      //       downloadData[key] = this.resultDataValue[key];
+      //       downloadData[key][entry] = this.resultDataValue[key][entry].title;
+      //     });
+      //   }
+      // });
+    }
   }
 
   incrementGroupNavigation() {

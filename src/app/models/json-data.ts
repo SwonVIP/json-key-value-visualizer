@@ -1,5 +1,5 @@
 export interface DataContainer {
-  [key: string]: DataItem | undefined;
+  [key: string]: DataItem;
 }
 
 export interface DataItem {
