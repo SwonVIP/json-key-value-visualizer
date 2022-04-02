@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { distinctUntilChanged, filter, Observable, Subject, tap } from 'rxjs';
+import { distinctUntilChanged, filter, Subject, tap } from 'rxjs';
 import { DataContainer } from './models/json-data';
 import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'key-value-visualizer';

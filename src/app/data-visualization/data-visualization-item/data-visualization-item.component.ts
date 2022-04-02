@@ -4,7 +4,6 @@ import { DataItemValue } from 'src/app/models/json-data';
 @Component({
   selector: 'app-data-visualization-item',
   templateUrl: './data-visualization-item.component.html',
-  styleUrls: ['./data-visualization-item.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DataVisualizationItemComponent implements OnInit {

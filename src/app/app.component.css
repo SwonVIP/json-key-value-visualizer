@@ -1,9 +1,0 @@
-.app-container {
-  display: flex;
-  flex-direction: row;
-  gap: 3rem;
-}
-.list {
-  display: flex;
-  flex-direction: column;
-}
