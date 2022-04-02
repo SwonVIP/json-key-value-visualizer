@@ -1,6 +1,6 @@
 <h1 class="text-3xl font-bold underline">JSON Key Value Visualizer MVP</h1>
 <h2 class="text-2xl font-bold my-2">Input JSON</h2>
-<div class="flex flew-row w-max">
+<div class="flex flew-row w-full">
   <div class="max-w-sm">
     <input type="file" accept="application/JSON" id="input-file" (change)="onChange($event)" />
     <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
@@ -11,7 +11,7 @@
     </ng-container>
   </div>
   <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
-    <div class="flex flex-col max-w-7xl">
+    <div class="flex flex-col w-10/12">
       <h2 class="text-1xl font-bold underline my-2">Group Navigation</h2>
       Group {{ groupIndex + 1 }} of {{ displayData.length }}
       <div class="inline-flex">
