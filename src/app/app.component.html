@@ -1,19 +1,15 @@
 <h1>JSON Key Value Visualizer MVP</h1>
 <h2>Input JSON</h2>
-<div *ngIf="inputError">Failed to update: Wrong JSON format!!!</div>
 <div class="app-container">
-  <textarea
-    name="data"
-    cols="42"
-    rows="20"
-    [placeholder]="placeholderValue"
-    id="data-input"
-    (keyup)="handleDataInputChange($event)"
-  ></textarea>
-  <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
-    <div class="list">
+  <div class="file-container">
+    <input type="file" accept="application/JSON" id="input-file" (change)="onChange($event)" />
+    <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
       <h2>Result</h2>
       <button (click)="initateDownload()">Download Result</button>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="isValid(resultDataValue) && displayData.length > 0">
+    <div class="list">
       <h2>Group Navigation</h2>
       Group {{ groupIndex + 1 }} of {{ displayData.length }}
       <button *ngIf="groupIndex > 0" (click)="decrementGroupNavigation()">Previous group</button>
