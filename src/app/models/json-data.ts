@@ -3,10 +3,15 @@ export interface DataContainer {
 }
 
 export interface DataItem {
-  [key: number]: DataItemValue;
+  TagSource: string;
+  ProductMap: DataItemValue[];
 }
 
 export interface DataItemValue {
+  [key: string]: DataItemValueData;
+}
+
+export interface DataItemValueData {
   title: string;
   img: string;
 }

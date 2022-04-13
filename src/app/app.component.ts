@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { distinctUntilChanged, filter, Subject, tap } from 'rxjs';
-import { DataContainer } from './models/json-data';
+import { BehaviorSubject, distinctUntilChanged, filter, Subject, tap } from 'rxjs';
+import { DataContainer, DataItemValueData } from './models/json-data';
 import { saveAs } from 'file-saver';
 
 @Component({
@@ -50,8 +50,8 @@ export class AppComponent {
     if (this.resultDataValue) {
       let parentKey, itemKey;
       ({ parentKey, itemKey } = keys);
-      delete this.resultDataValue[parentKey]![itemKey];
-      if (Object.entries(this.resultDataValue[parentKey] as object).length === 0) {
+      delete this.resultDataValue[parentKey].ProductMap![itemKey];
+      if (Object.entries(this.resultDataValue[parentKey].ProductMap as object).length === 0) {
         this.removeGroupByKey(parentKey);
       }
     }
@@ -59,21 +59,22 @@ export class AppComponent {
 
   initateDownload() {
     if (this.resultDataValue) {
+      // flatten response to not include TagSource and ProductMap
+      let downloadData: any = {};
+      Object.keys(this.resultDataValue).forEach((key) => {
+        if (typeof this.resultDataValue[key].ProductMap === 'object' && this.resultDataValue[key].ProductMap) {
+          Object.keys(this.resultDataValue[key].ProductMap).forEach((entry: any) => {
+            downloadData[key] = this.resultDataValue[key];
+            downloadData[key][entry] = this.resultDataValue[key].ProductMap[entry];
+          });
+        }
+        delete downloadData[key].ProductMap;
+        delete downloadData[key].TagSource;
+      });
       saveAs(
-        new Blob([JSON.stringify(this.resultDataValue)], { type: 'application/json;charset=utf-8' }),
+        new Blob([JSON.stringify(downloadData)], { type: 'application/json;charset=utf-8' }),
         'curated-groups.json'
       );
-      // TODO if mapping not changed in backend
-      // flatten response to not include nested title, img object anymore
-      // let downloadData: any = {};
-      // Object.keys(this.resultDataValue).forEach((key) => {
-      //   if (typeof this.resultDataValue[key] === 'object' && this.resultDataValue[key]) {
-      //     Object.keys(this.resultDataValue[key]).forEach((entry: any) => {
-      //       downloadData[key] = this.resultDataValue[key];
-      //       downloadData[key][entry] = this.resultDataValue[key][entry].title;
-      //     });
-      //   }
-      // });
     }
   }
 

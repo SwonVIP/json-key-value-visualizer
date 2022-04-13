@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { DataItemValue } from 'src/app/models/json-data';
+import { DataItemValueData } from 'src/app/models/json-data';
 
 @Component({
   selector: 'app-data-visualization-item',
@@ -9,7 +9,8 @@ import { DataItemValue } from 'src/app/models/json-data';
 export class DataVisualizationItemComponent implements OnInit {
   // TODO Might wanna introduce redux store for more convinent state management!
   @Input() key: string = '';
-  @Input() value: DataItemValue = { title: '', img: '' };
+  // TODO fix unprecise typing
+  @Input() value: any = { title: '', img: '' };
   @Output() dataChangeItem: EventEmitter<string> = new EventEmitter();
 
   constructor() {}

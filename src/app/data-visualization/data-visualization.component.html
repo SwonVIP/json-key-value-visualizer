@@ -1,10 +1,11 @@
 <h3 class="my-5 text-2xl font-bold">Category Tag: {{ key }}</h3>
+<h4>Tag Source: {{ value.TagSource }}</h4>
 <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-l" (click)="discardGroupByKey(key)">
   X Discard whole category tag
 </button>
 <div class="flex flex-row flex-wrap">
   <app-data-visualization-item
-    *ngFor="let val of value | keyvalue"
+    *ngFor="let val of value.ProductMap | keyvalue"
     [key]="val.key"
     [value]="val.value"
     (dataChangeItem)="discardItemByKey($event)"
